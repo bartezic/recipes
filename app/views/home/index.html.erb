@@ -1,0 +1,26 @@
+<%= form_tag({controller: "home", action: "index"}, method: "get") do %>
+  <div>Pleas provide ingredients you have(separated by comma).</div>
+  <%= text_area_tag :ingredients, params[:ingredients] %>
+  <%= submit_tag "Submit" %>
+<% end %>
+
+<div>Matched recipes</div>
+<hr/>
+<% @matched_dishes.each do |dish| %>
+  <div>
+    <div>Name: <%= dish.name %></div>
+    <div>Category: <%= dish.category.name %></div>
+    <div>Author: <%= dish.author.name %></div>
+    <div>Ratings: <%= dish.ratings %></div>
+    <div>Cook time: <%= dish.cook_time %></div>
+    <div>Prep time: <%= dish.prep_time %></div>
+    <%= image_tag(dish.image, width: 200) %>
+    <div>Ingredients:</div>
+    <ul>
+      <% dish.dish_ingredients.each do |dish_ingredient| %>
+        <li><%= dish_ingredient.name %></li>
+      <% end %>
+    </ul>
+    <hr/>
+  </div>
+<% end %>
